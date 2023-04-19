@@ -1,0 +1,23 @@
+.icon {
+    width: 1.5rem;
+}
+
+.status {
+    display: flex;
+    justify-content: center;
+}
+
+.card {
+    display: flex;
+    height: 100px;
+    margin: 0 2rem;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #C7C7C7;
+    color: #31336A;
+}
+
+.list {
+    table-layout: fixed;
+    width: 100%;
+}
