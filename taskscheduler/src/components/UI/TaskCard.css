@@ -17,6 +17,11 @@
     color: #31336A;
 }
 
+.card:hover {
+    cursor: pointer;
+    color: #5475CA;
+}
+
 .list {
     table-layout: fixed;
     width: 100%;

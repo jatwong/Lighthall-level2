@@ -1,0 +1,50 @@
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+
+form label {
+    display: block;
+    text-align: left;
+    margin: 0.5rem 0;
+}
+
+form input,
+form textarea {
+    height: 2rem;
+    border-radius: 7px;
+    border: solid 0.25px #31336A;
+    box-sizing: border-box;
+    padding: 0.5rem;
+}
+
+.description {
+    height: 5rem;
+}
+
+.status {
+    width: fit-content;
+    height: 2.5rem;
+    border-radius: 10px;
+    border: solid 0.25px #31336A;
+    box-sizing: border-box;
+    padding: 0.5rem;
+}
+
+.date {
+    width: fit-content;
+}
+
+.save {
+    margin-top: 2rem;
+    align-self: center;
+}
+
+form input:focus-visible,
+form textarea:focus-visible,
+.status:focus-visible {
+    outline: none;
+    outline-offset: none;
+}

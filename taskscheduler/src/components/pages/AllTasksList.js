@@ -1,67 +1,80 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import classes from './AllTasksList.module.css';
-import Button from '../UI/Button';
-import TaskCard from '../TaskCard';
+import TaskCard from '../UI/TaskCard';
+import AddTaskModal from '../AddTaskModal';
+import ConfirmDeleteModal from '../ConfirmDeleteModal';
+import EditTaskModal from '../EditTaskModal';
 
 const AllTasksList = () => {
-  let taskList = [];
+  const [tasks, setTasks] = useState([]);
+  const [showAddTask, setShowAddTask] = useState(false);
+  const [showDelete, setShowDelete] = useState(false);
+  const [showEdit, setShowEdit] = useState(false);
+  const [taskItem, setTaskItem] = useState({});
+  const [taskId, setTaskId] = useState("");
 
-  const getAllTasks = () => {
-    fetch(
-      'https://lighthall2-task-tracker-server.hemanth-ks97.repl.co/signup',
-      {
-        method: 'POST',
-        body: JSON.stringify({
-          username: 'Mary',
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    ).then((res) => {
-      if (res.status === 200) {
-        return res.json().then((data) => {
-          console.log('data', data);
-          for (const task of data) {
-            const taskObj = {
-              username: task.username,
-              task_id: task.task_id,
-              description: task.description,
-              title: task.title,
-              date: task.due_date,
-              status: task.status,
-            };
-
-            taskList.push(taskObj);
-          }
-        });
-      }
-    });
-  };
+  const user = 'Kevin';
 
   useEffect(() => {
+    const getAllTasks = async () => {
+      try {
+        const response = await fetch(
+          'https://servering.jayraval20.repl.co/signup',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              // TODO: get username from login
+              username: user,
+            }),
+          }
+        );
+        const data = await response.json();
+        setTasks(data);
+      } catch (error) {
+        // set error message?
+        console.log('Error!', error);
+      }
+    };
+
     getAllTasks();
   });
 
-  let entry = [
-    {
-      user: 'Mary',
-      title: 'read books',
-      description: 'read 5 books harry potter',
-      status: 'In Progress',
-      date: '04/23/2023',
-    },
-    {
-      user: 'Mary',
-      title: 'cook lunch',
-      description: 'prepare fod',
-      status: 'Completed',
-      date: '04/23/2023',
-    },
-  ];
+  // handles show/hiding Add Task modal
+  const closeAddTask = () => {
+    setShowAddTask(false);
+  };
+  const addTask = () => {
+    setShowAddTask(true);
+  };
+
+  // handles show/hiding Delete Task modal
+  const closeDeleteTask = () => {
+    setShowDelete(false);
+  };
+  const deleteTask = (id) => {
+    setTaskId(id);
+    setShowDelete(true);
+  };
+
+  // handles show/hiding Edit Task modal
+  const closeEditTask = () => {
+    setShowEdit(false);
+  };
+  const editTask = (taskObj) => {
+    setTaskItem(taskObj);
+    setShowEdit(true);
+  };
 
   return (
     <>
+      {showEdit && <EditTaskModal onClick={closeEditTask} taskObj={taskItem} />}
+      {showDelete && (
+        <ConfirmDeleteModal onClick={closeDeleteTask} taskId={taskId} />
+      )}
+      {showAddTask && <AddTaskModal onClick={closeAddTask} username={user} />}
       <div className={classes.page}>
         <div className={classes.heading}>
           <table className={classes.list}>
@@ -76,22 +89,22 @@ const AllTasksList = () => {
             </tbody>
           </table>
         </div>
-        {console.log('here', taskList)}
-        <TaskCard
-          title={entry[0].title}
-          description={entry[0].description}
-          status={entry[0].status}
-          date={entry[0].date}
-        />
-        <TaskCard
-          title={entry[1].title}
-          description={entry[1].description}
-          status={entry[1].status}
-          date={entry[1].date}
-        />
-
-        <p className={`${classes.card} ${classes.addTask}`}>+ Add a new task</p>
-        <Button onClick={getAllTasks} />
+        {tasks.map((task) => (
+          <TaskCard
+            key={task._id}
+            username={user}
+            id={task._id}
+            title={task.title}
+            description={task.description}
+            status={task.status}
+            date={task.due_date}
+            confirmDelete={deleteTask}
+            editTask={editTask}
+          />
+        ))}
+        <p className={`${classes.card} ${classes.addTask}`} onClick={addTask}>
+          + Add a new task
+        </p>
       </div>
     </>
   );
