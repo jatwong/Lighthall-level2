@@ -41,7 +41,7 @@ const EditTaskModal = (props) => {
     title: newTitle,
     description: newDescription,
     status: newOption,
-    date: convertDate,
+    due_date: convertDate,
   };
 
   // edit new task
@@ -56,6 +56,7 @@ const EditTaskModal = (props) => {
       body: JSON.stringify(newTaskObj),
     });
     
+    props.update();
     props.onClick();
   };
 

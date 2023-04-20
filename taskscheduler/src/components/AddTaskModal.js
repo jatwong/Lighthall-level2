@@ -5,8 +5,8 @@ import classes from './TaskModal.module.css';
 import closeX from './UI/icons/close.svg';
 import Button from './UI/Button';
 
-const Backdrop = (props) => {
-  return <div className='backdrop' onClick={props.onClick} />;
+const Backdrop = () => {
+  return <div className='backdrop' />;
 };
 
 const AddTaskModal = (props) => {
@@ -35,29 +35,27 @@ const AddTaskModal = (props) => {
   const submitNewTask = (event) => {
     event.preventDefault();
 
-    fetch(
-      'https://servering.jayraval20.repl.co/task',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username: props.username,
-          title: title,
-          description: description,
-          status: option,
-          due_date: date,
-        }),
-      }
-    );
+    fetch('https://servering.jayraval20.repl.co/task', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: props.username,
+        title: title,
+        description: description,
+        status: option,
+        due_date: date,
+      }),
+    });
 
-    props.onClick()
-  }
+    props.update();
+    props.onClick();
+  };
 
   return (
     <>
-      <Backdrop onClick={props.onClick} />
+      <Backdrop />
       <div className='modal'>
         <img
           onClick={props.onClick}

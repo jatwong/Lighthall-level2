@@ -33,6 +33,7 @@ const ConfirmDeleteModal = (props) => {
       console.log(error);
     }
     setDone(true);
+    props.update();
   };
 
   

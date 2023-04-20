@@ -5,7 +5,7 @@ import AllTasksList from './components/pages/AllTasksList';
 function App() {
   return (
     <div className='App'>
-      <Header username='Kevin'/>
+      <Header username='Mary'/>
       <AllTasksList />
     </div>
   );

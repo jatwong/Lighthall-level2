@@ -46,5 +46,4 @@ form input:focus-visible,
 form textarea:focus-visible,
 .status:focus-visible {
     outline: none;
-    outline-offset: none;
 }
