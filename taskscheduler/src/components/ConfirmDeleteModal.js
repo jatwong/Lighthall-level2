@@ -26,8 +26,6 @@ const ConfirmDeleteModal = (props) => {
         }
       );
       const data = await response.json();
-
-      console.log(data);
       setMessage(data.message);
     } catch (error) {
       console.log(error);

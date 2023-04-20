@@ -6,11 +6,9 @@ import Login from './components/pages/login';
 function App() {
   return (
     <div className='App'>
-      <div>
-        <Login />
-        <Header username='Mary' />
-        <AllTasksList />
-      </div>
+      <div>{/* <Login /> */}</div>
+      <Header username='Mary' />
+      <AllTasksList />
     </div>
   );
 }
