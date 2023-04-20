@@ -2,13 +2,13 @@
 import './App.css';
 import Header from './components/UI/Header';
 import AllTasksList from './components/pages/AllTasksList';
+import Login from './components/pages/login';
 
 function App() {
   return (
     <div className='App'>
-      <Header />
       <div>
-        <AllTasksList />
+        <Login/>
       </div>
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />

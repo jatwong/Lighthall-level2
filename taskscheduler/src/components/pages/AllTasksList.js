@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import classes from './AllTasksList.module.css';
 import Button from '../UI/Button';
 import TaskCard from '../TaskCard';
+import Header from '../UI/Header';
 
 const AllTasksList = () => {
   let taskList = [];
@@ -61,7 +62,7 @@ const AllTasksList = () => {
   ];
 
   return (
-    <>
+    <><Header />
       <div className={classes.page}>
         <div className={classes.heading}>
           <table className={classes.list}>

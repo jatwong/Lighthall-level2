@@ -1,0 +1,56 @@
+.login-page{
+    background-color: #F5F5F5;
+    height: 100vh;
+}
+
+.proj-logo{
+    position: relative;
+    top: 170px;
+    margin-left: 543px;
+    margin-right: 561px;
+    
+}
+
+.txt{
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 30px;
+    font-style: italic;
+    font-weight: 300;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: left; 
+}
+
+.proj-txt{
+    margin-left: 561px;
+    margin-right: 561px;
+    position: relative;
+    top: 140px;
+}
+
+.proj-username{
+    margin-left: 498px;
+    margin-top: 220px;
+    margin-right: 500px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.user-input{
+    min-width: 391px;
+    height: 60px;
+    border-radius: 30px;
+    border: none;
+    background-color: #FFFFFF;
+    text-align: center;
+}
+
+.logn-btn{
+   border: none;
+   background-color: #F5F5F5;
+}
+
+.logn-btn:hover{
+    cursor: pointer;
+}
