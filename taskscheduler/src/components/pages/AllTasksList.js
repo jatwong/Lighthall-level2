@@ -10,6 +10,7 @@ const AllTasksList = () => {
   const [tasks, setTasks] = useState([]);
   const [showAddTask, setShowAddTask] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
+  const [refresher, setRefresher] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const [taskItem, setTaskItem] = useState({});
   const [taskId, setTaskId] = useState('');
@@ -34,9 +35,6 @@ const AllTasksList = () => {
           }
         );
         const data = await response.json();
-
-        // sort to date asc
-        data.sort((a, b) => new Date(a.due_date) - new Date(b.due_date));
         setTasks(data);
       } catch (error) {
         // set error message?
@@ -45,7 +43,7 @@ const AllTasksList = () => {
     };
 
     getAllTasks();
-  }, []);
+  }, [refresher]);
 
   // handles show/hiding Add Task modal
   const closeAddTask = () => {
@@ -78,31 +76,10 @@ const AllTasksList = () => {
     setSortBy(event.target.value);
   };
 
-  const refresh = async () => {
-    console.log('refresh...')
-    try {
-      const response = await fetch(
-        'https://servering.jayraval20.repl.co/signup',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            // TODO: get username from login
-            username: user,
-          }),
-        }
-      );
-      const data = await response.json();
+  const refresh = () => {
+    setRefresher(!refresher)
+  }
 
-      setTasks(data);
-      getSortedTasks();
-    } catch (error) {
-      // set error message?
-      console.log('Error!', error);
-    }
-  };
 
   const getSortedTasks = () => {
     let sorted = {};
@@ -133,7 +110,7 @@ const AllTasksList = () => {
     <>
       {showEdit && <EditTaskModal onClick={closeEditTask} taskObj={taskItem} update={refresh}/>}
       {showDelete && (
-        <ConfirmDeleteModal onClick={closeDeleteTask} taskId={taskId} update={refresh} />
+        <ConfirmDeleteModal onClick={closeDeleteTask} taskId={taskId} update={refresh}/>
       )}
       {showAddTask && <AddTaskModal onClick={closeAddTask} username={user} update={refresh}/>}
       <div className={classes.page}>
