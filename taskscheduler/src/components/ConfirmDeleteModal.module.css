@@ -1,0 +1,12 @@
+.spacing {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 0.5rem 1rem;
+}
+
+.close {
+    margin-top: 1rem;
+    display: flex;
+    align-self: center;
+}

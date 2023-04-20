@@ -6,6 +6,30 @@
     justify-content: center;
 }
 
+.sort {
+    display: flex;
+    margin: 1rem 2rem;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.sort label {
+    margin-right: 0.5rem;
+}
+
+.sort select {
+    width: fit-content;
+    height: 2rem;
+    padding: 0.25rem;
+    border: solid 0.05px #31336A;
+    box-sizing: border-box;
+    border-radius: 8px;
+}
+
+.sort select:focus-visible {
+    outline: none;
+}
+
 .heading {
     display: flex;
     height: 4rem;
