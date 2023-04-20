@@ -54,10 +54,10 @@ const EditTaskModal = (props) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(newTaskObj),
+    }).then(() => {
+      props.update();
+      props.onClick();
     });
-    
-    props.update();
-    props.onClick();
   };
 
   return (

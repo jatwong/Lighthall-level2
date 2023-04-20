@@ -47,10 +47,10 @@ const AddTaskModal = (props) => {
         status: option,
         due_date: date,
       }),
+    }).then(() => {
+      props.update();
+      props.onClick();
     });
-
-    props.update();
-    props.onClick();
   };
 
   return (
