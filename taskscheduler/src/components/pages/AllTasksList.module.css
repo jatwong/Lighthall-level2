@@ -1,0 +1,45 @@
+.page {
+    /* background-color: aquamarine; */
+    display: flex;
+    margin-top: 5rem;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.heading {
+    display: flex;
+    height: 4rem;
+    margin: 0 2rem;
+    align-items: center;
+    box-shadow: 0 8px 8px -8px rgba(0, 0, 0, 0.25);
+    color: #31336A;
+}
+
+.list {
+    table-layout: fixed;
+    width: 100%;
+}
+
+.list th {
+    font-size: small;
+    font-weight: 400;
+}
+
+.card {
+    display: flex;
+    height: 100px;
+    margin: 0 2rem;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #C7C7C7;
+    color: #31336A;
+}
+
+.addTask {
+    font-style: italic;
+}
+
+.addTask:hover {
+    cursor: pointer;
+    color: #5475CA;
+}
