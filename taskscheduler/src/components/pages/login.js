@@ -1,14 +1,14 @@
 import './login.css';
 import logo from '../UI/icons/logo.svg';
 import arrow from '../UI/icons/arrowRight.svg';
-
-const Login = () => {
+import Cookies from 'js-cookie';
+const Login = (props) => {
 
     const sendUsername = () => {
         const username = document.querySelector('.user-input').value;
 
         if (username !== '') {
-            fetch('https://lighthall2-task-tracker-server.hemanth-ks97.repl.co/signup', {
+            fetch('https://servering.jayraval20.repl.co/signup', {
                 method: 'POST',
                 body: JSON.stringify({
                     username: username,
@@ -18,11 +18,16 @@ const Login = () => {
                 },
             }).then((res) => {
                 if (res.status === 200) {
-                    return res.json().then((data) => {
-                        window.location.href = '/AllTasksList';
-                    });
+                    props.setUser(username)
+                    Cookies.set("user", username, {expires: 7})
                 }
             });
+        }
+    }
+
+    const handleKeyUp = (e) => {
+        if (e.keyCode === 13 || e.key === 'Enter') {
+            sendUsername()
         }
     }
 
@@ -35,7 +40,7 @@ const Login = () => {
                 <h1 className='txt'>Keep your tasks on track!</h1>
             </div>
             <div className='proj-username'>
-                <input className='user-input' type="text" placeholder="Enter your name" />
+                <input onKeyUp={handleKeyUp} className='user-input' type="text" placeholder="Enter your name" />
                 <button className='logn-btn' onClick={sendUsername}><img src={arrow} alt='logn-btn'></img></button>
             </div>
         </div>

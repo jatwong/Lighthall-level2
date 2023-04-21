@@ -1,8 +1,9 @@
 import classes from './Header.module.css';
-
+import Cookies from 'js-cookie';
 const Header = (props) => {
   const logoutHandler = () => {
-    console.log('logging out...')
+    props.setUser("")
+    Cookies.remove("user")
   };
 
   return (
