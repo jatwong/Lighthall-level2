@@ -5,8 +5,9 @@ import AddTaskModal from '../AddTaskModal';
 import ConfirmDeleteModal from '../ConfirmDeleteModal';
 import EditTaskModal from '../EditTaskModal';
 import * as Sorter from '../SortHelper';
+import Header from '../UI/Header';
 
-const AllTasksList = () => {
+const AllTasksList = (props) => {
   const [tasks, setTasks] = useState([]);
   const [showAddTask, setShowAddTask] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
@@ -15,8 +16,6 @@ const AllTasksList = () => {
   const [taskItem, setTaskItem] = useState({});
   const [taskId, setTaskId] = useState('');
   const [sortBy, setSortBy] = useState('Date ASC');
-
-  const user = 'Mary';
 
   useEffect(() => {
     const getAllTasks = async () => {
@@ -29,8 +28,7 @@ const AllTasksList = () => {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              // TODO: get username from login
-              username: user,
+              username: props.user,
             }),
           }
         );
@@ -112,7 +110,8 @@ const AllTasksList = () => {
       {showDelete && (
         <ConfirmDeleteModal onClick={closeDeleteTask} taskId={taskId} update={refresh}/>
       )}
-      {showAddTask && <AddTaskModal onClick={closeAddTask} username={user} update={refresh}/>}
+      {showAddTask && <AddTaskModal onClick={closeAddTask} username={props.user} update={refresh}/>}
+      <Header username={props.user} setUser={props.setUser}/>
       <div className={classes.page}>
         <div className={classes.sort}>
           <label>Sort by</label>
@@ -141,7 +140,7 @@ const AllTasksList = () => {
         {getSortedTasks().map((task) => (
           <TaskCard
             key={task._id}
-            username={user}
+            username={props.user}
             id={task._id}
             title={task.title}
             description={task.description}
@@ -156,7 +155,7 @@ const AllTasksList = () => {
         </p>
       </div>
     </>
-  );
+    );
 };
 
 export default AllTasksList;
